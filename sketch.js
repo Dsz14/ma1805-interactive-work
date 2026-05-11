@@ -19,16 +19,17 @@ function setup() {
   sliderScale.style('width', '100px');
 
   planet = new Planet(100, 100, 5); // create the planet at x=100, y=100, radius 5
-  sun = new sun(0, 0, 20); // create the sun at x=0, y=0, radius 20
+  sun = new Sun(0, 0, 20); // create the sun at x=0, y=0, radius 20
 }
 
 function keyPressed() {
   if (key ==="a") {
-    let mx = (mouseX - width / 2) / scale; // get the mouse x position relative to the center of the canvas and scale it
-    let my = (mouseY - height / 2) / scale;
+    let mx = (mouseX - width / 2) * 1/ scale; // get the mouse x position relative to the center of the canvas and scale it
+    let my = (mouseY - height / 2) * 1/ scale;
     planet = new Planet (mx, my, 5); // create a new planet at the mouse position with the mass from the slider
   }
 }
+
 function draw() {
   background(0);
   translate(width / 2, height / 2); // move the origin to the center of the canvas
@@ -45,5 +46,9 @@ function draw() {
   text('Scale: ' + scale, -340, 220);
 
   planet.update();
+  planet.show();
+
+  sun.attract(planet);
   sun.show();
 }
+
